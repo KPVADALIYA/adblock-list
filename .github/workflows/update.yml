@@ -1,25 +1,25 @@
-name: Daily Update
-on:
+name: Blocklist Updater
+on: 
   schedule:
-    - cron: "0 0 * * *" # Daily updates
+    - cron: "0 12 * * *"  # Daily noon update
   workflow_dispatch:
 
 jobs:
-  update:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-      - name: Install dependencies
-        run: pip install requests
-      - name: Run compiler
-        run: |
-          wget https://raw.githubusercontent.com/ghostnetic/adblock-filter-compiler/main/adblock_filter_compiler.py
-          python adblock_filter_compiler.py
-      - name: Commit changes
+      
+      - name: Validate config
+        run: python -m json.tool config.json
+      
+      - name: Download compiler
+        run: wget -q https://raw.githubusercontent.com/ghostnetic/adblock-filter-compiler/main/adblock_filter_compiler.py
+      
+      - name: Run compilation
+        run: python adblock_filter_compiler.py
+      
+      - name: Push changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Auto-update blocklist"
+          commit_message: "Auto-update: $(date +'%Y-%m-%d %T')"
