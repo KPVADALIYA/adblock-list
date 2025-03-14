@@ -1,6 +1,6 @@
 {
   "blocklist_urls": [
-    "https://adblock.ee/list.txt"
+"https://adblock.ee/list.txt"
 "https://cdn.jsdelivr.net/gh/DandelionSprout/adfilt@master/NorwegianList.txt"
 "https://cdn.jsdelivr.net/gh/DandelionSprout/adfilt@master/SerboCroatianList.txt"
 "https://cdn.jsdelivr.net/gh/dimisa-RUAdList/RUAdListCDN@main/lists/ruadlist.ubo.min.txt"
